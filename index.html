@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CyberPortfolio | Developer</title>
+  <link rel="stylesheet" href="src/styles/main.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <canvas id="starfield"></canvas>
+  <div class="cursor-glow" id="cursorGlow"></div>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo"><span class="logo-bracket">[</span><span class="logo-text">DEV</span><span class="logo-bracket">]</span><span class="logo-cursor">_</span></a>
+      <div class="nav-toggle" id="navToggle" aria-label="Toggle navigation"><span></span><span></span><span></span></div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero" class="nav-link active">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+  <section class="hero" id="hero">
+    <div class="hero-grid-overlay"></div>
+    <div class="code-typing-bg" aria-hidden="true">
+      <span class="code-line" style="--delay: 0s; --width: 68%">const profile = { role: "Computer Engineering Student" };</span>
+      <span class="code-line" style="--delay: 0.6s; --width: 78%">function build(project) { return project + "++"; }</span>
+      <span class="code-line" style="--delay: 1.2s; --width: 62%">let skills = ["C++", "Python", "Web", "IoT"];</span>
+      <span class="code-line" style="--delay: 1.8s; --width: 74%">if (challenge) { learn(); iterate(); ship(); }</span>
+      <span class="code-line" style="--delay: 2.4s; --width: 60%">while (curious) { build(); test(); improve(); }</span>
+      <span class="code-line" style="--delay: 3s; --width: 72%">// Designing systems where hardware meets software</span>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge reveal-up"><span class="badge-dot"></span><span>Available for opportunities</span></div>
+      <h1 class="hero-title reveal-up"><span class="title-line">Walaa aldine</span><span class="title-line gradient-text">alsaleh</span><span class="title-line">Computer Engineering Student</span></h1>
+      <p class="hero-subtitle reveal-up">Computer Engineering student passionate about building innovative tech solutions and exploring the future of web development</p>
+      <div class="hero-buttons reveal-up"><a href="#projects" class="btn btn-primary"><span>View Projects</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a><a href="#contact" class="btn btn-secondary"><span>Contact Me</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a></div>
+      <div class="hero-stats reveal-up"><div class="stat-item"><span class="stat-number" data-target="3">0</span><span class="stat-suffix">+</span><span class="stat-label">Projects</span></div><div class="stat-divider"></div><div class="stat-item"><span class="stat-number" data-target="0">0</span><span class="stat-suffix"></span><span class="stat-label">Years Exp</span></div><div class="stat-divider"></div><div class="stat-item"><span class="stat-number" data-target="5">0</span><span class="stat-suffix">+</span><span class="stat-label">Courses</span></div></div>
+    </div>
+    <div class="hero-scroll-indicator"><div class="scroll-line"></div><span>SCROLL</span></div>
+  </section>
+  <section class="section about" id="about">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">// ABOUT_ME</span>
+        <h2 class="section-title">About <span class="gradient-text">Me</span></h2>
+        <p class="section-desc">Get to know the developer behind the code</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-image reveal-left">
+          <div class="image-frame">
+            <img class="profile-photo" src="src/assets/profile.jpg" alt="Walaa aldine alsaleh" />
+            <div class="frame-corner tl"></div>
+            <div class="frame-corner tr"></div>
+            <div class="frame-corner bl"></div>
+            <div class="frame-corner br"></div>
+          </div>
+          <div class="about-tech-stack">
+            <span class="tech-tag">Next.js</span><span class="tech-tag">Node.js</span><span class="tech-tag">TypeScript</span><span class="tech-tag">Python</span>
+          </div>
+        </div>
+        <div class="about-content reveal-right">
+          <div class="glass-card">
+            <h3><span class="accent">&gt;</span> Hello, I'm Walaa aldine alsaleh</h3>
+            <p>A passionate Computer Engineering student with a deep interest in software development, embedded systems, and modern web technologies. I'm constantly learning and building projects that push my understanding of how hardware and software work together.</p>
+            <p>My journey in computer engineering has equipped me with a strong foundation in programming, algorithms, and system design. I enjoy working on projects that combine creativity with technical problem-solving, from web applications to embedded systems.</p>
+            <div class="about-details">
+              <div class="detail-item"><span class="detail-label">Name:</span><span class="detail-value">Walaa aldine alsaleh</span></div>
+              <div class="detail-item"><span class="detail-label">Location:</span><span class="detail-value">Syria</span></div>
+              <div class="detail-item"><span class="detail-label">Experience:</span><span class="detail-value">Student / 0 Years</span></div>
+              <div class="detail-item"><span class="detail-label">Availability:</span><span class="detail-value status-available">Free for opportunities</span></div>
+            </div>
+            <a href="src/assets/Walaa%20Aldine%20Alsaleh%20_%20Resume.pdf" class="btn btn-primary download-btn" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Download Resume</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section projects" id="projects">
+    <div class="container">
+      <div class="section-header reveal-up"><span class="section-tag">// PROJECTS</span><h2 class="section-title">My <span class="gradient-text">Projects</span></h2><p class="section-desc">From raw ideas to polished digital experiences</p></div>
+      <article class="video-case-study glass-card reveal-up">
+        <div class="video-case-study-copy">
+          <span class="case-study-kicker">// AI_VIDEO_EDITING</span>
+          <h3>Turn simple handbag photos into a feature ad with the magic of <span class="gradient-text">AI</span></h3>
+          <p>I transform ordinary product images into cinematic advertising concepts, shaping the visual story from the first frame through to the final video.</p>
+          <div class="project-tags"><span>AI Video</span><span>Creative Direction</span><span>Product Ads</span></div>
+          <div class="case-study-meta"><span class="status-available"><span class="badge-dot"></span> Featured work</span><span>01 / 03</span></div>
+        </div>
+        <div class="video-workflow" aria-label="Bagco handbag AI video production workflow">
+          <div class="workflow-stage workflow-input">
+            <div class="workflow-stage-heading"><span class="workflow-index">01</span><span>Product Image</span></div>
+            <div class="product-photo-grid">
+              <img src="src/assets/products_assets/bagco%20handbag/product_photo_1%20(1).jpg" alt="Bagco handbag product image one" />
+              <img src="src/assets/products_assets/bagco%20handbag/product_photo_1%20(2).jpg" alt="Bagco handbag product image two" />
+              <img src="src/assets/products_assets/bagco%20handbag/product_photo_1%20(3).jpg" alt="Bagco handbag product image three" />
+              <img src="src/assets/products_assets/bagco%20handbag/product_photo_1%20(4).jpg" alt="Bagco handbag product image four" />
+            </div>
+          </div>
+          <div class="workflow-arrow" aria-hidden="true">&#8594;</div>
+          <div class="workflow-stage"><div class="workflow-stage-heading"><span class="workflow-index">02</span><span>Storyboard</span></div><div class="workflow-media"><img src="src/assets/products_assets/bagco%20handbag/story_board.jpg" alt="Storyboard for the Bagco handbag advertisement" /></div></div>
+          <div class="workflow-arrow" aria-hidden="true">&#8594;</div>
+          <div class="workflow-stage workflow-output">
+            <div class="workflow-stage-heading">
+              <span class="workflow-index">03</span>
+              <span>Final Video</span>
+            </div>
+            <div class="workflow-media workflow-video">
+              <video controls preload="metadata">
+                <source src="src/assets/products_assets/bagco%20handbag/final_video.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <a href="#contact" class="btn btn-primary workflow-cta">
+              <span>Get Your AI Video</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+      <article class="video-case-study glass-card reveal-up">
+        <div class="video-case-study-copy">
+          <span class="case-study-kicker">// AI_VIDEO_EDITING</span>
+          <h3>Give an everyday handbag a cinematic story with <span class="gradient-text">AI</span></h3>
+          <p>I turn Olk handbag photography into a polished product advertisement with a clear visual rhythm from storyboard to final cut.</p>
+          <div class="project-tags"><span>AI Video</span><span>Creative Direction</span><span>Product Ads</span></div>
+          <div class="case-study-meta"><span class="status-available"><span class="badge-dot"></span> Featured work</span><span>02 / 03</span></div>
+        </div>
+        <div class="video-workflow" aria-label="Olk handbag AI video production workflow">
+          <div class="workflow-stage workflow-input"><div class="workflow-stage-heading"><span class="workflow-index">01</span><span>Product Image</span></div><div class="product-photo-grid">
+            <img src="src/assets/products_assets/olk%20handbag/prduct_image%20(1).jpg" alt="Olk handbag product image one" /><img src="src/assets/products_assets/olk%20handbag/prduct_image%20(2).jpg" alt="Olk handbag product image two" /><img src="src/assets/products_assets/olk%20handbag/prduct_image%20(3).jpg" alt="Olk handbag product image three" /><img src="src/assets/products_assets/olk%20handbag/prduct_image%20(4).jpg" alt="Olk handbag product image four" />
+          </div></div>
+          <div class="workflow-arrow" aria-hidden="true">&#8594;</div>
+          <div class="workflow-stage"><div class="workflow-stage-heading"><span class="workflow-index">02</span><span>Storyboard</span></div><div class="workflow-media"><img src="src/assets/products_assets/olk%20handbag/storybaord.jpg" alt="Storyboard for the Olk handbag advertisement" /></div></div>
+          <div class="workflow-arrow" aria-hidden="true">&#8594;</div>
+          <div class="workflow-stage workflow-output"><div class="workflow-stage-heading"><span class="workflow-index">03</span><span>Final Video</span></div><div class="workflow-media workflow-video"><video controls preload="metadata"><source src="src/assets/products_assets/olk%20handbag/final_video.mp4" type="video/mp4" />Your browser does not support the video tag.</video></div><a href="#contact" class="btn btn-primary workflow-cta"><span>Get Your AI Video</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+        </div>
+      </article>
+      <article class="video-case-study glass-card reveal-up">
+        <div class="video-case-study-copy">
+          <span class="case-study-kicker">// AI_VIDEO_EDITING</span>
+          <h3>Build a feature ad for a modern backpack with <span class="gradient-text">AI</span></h3>
+          <p>I shape WiWU backpack images into a focused product story, pairing a practical design with an energetic final video.</p>
+          <div class="project-tags"><span>AI Video</span><span>Creative Direction</span><span>Product Ads</span></div>
+          <div class="case-study-meta"><span class="status-available"><span class="badge-dot"></span> Featured work</span><span>03 / 03</span></div>
+        </div>
+        <div class="video-workflow" aria-label="WiWU backpack AI video production workflow">
+          <div class="workflow-stage workflow-input"><div class="workflow-stage-heading"><span class="workflow-index">01</span><span>Product Image</span></div><div class="product-photo-grid">
+            <img src="src/assets/products_assets/wiwu%20backbag/product_images%20(1).jpg" alt="WiWU backpack product image one" /><img src="src/assets/products_assets/wiwu%20backbag/product_images%20(1)%20(2).jpg" alt="WiWU backpack product image two" /><img src="src/assets/products_assets/wiwu%20backbag/product_images%20(1)%20(3).jpg" alt="WiWU backpack product image three" /><img src="src/assets/products_assets/wiwu%20backbag/product_images%20(1)%20(4).jpg" alt="WiWU backpack product image four" />
+          </div></div>
+          <div class="workflow-arrow" aria-hidden="true">&#8594;</div>
+          <div class="workflow-stage"><div class="workflow-stage-heading"><span class="workflow-index">02</span><span>Storyboard</span></div><div class="workflow-media"><img src="src/assets/products_assets/wiwu%20backbag/storyboard.jpeg" alt="Storyboard for the WiWU backpack advertisement" /></div></div>
+          <div class="workflow-arrow" aria-hidden="true">&#8594;</div>
+          <div class="workflow-stage workflow-output"><div class="workflow-stage-heading"><span class="workflow-index">03</span><span>Final Video</span></div><div class="workflow-media workflow-video"><video controls preload="metadata"><source src="src/assets/products_assets/wiwu%20backbag/final_video.mp4" type="video/mp4" />Your browser does not support the video tag.</video></div><a href="#contact" class="btn btn-primary workflow-cta"><span>Get Your AI Video</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+        </div>
+      </article>
+      <template class="projects-grid">
+        <!-- Project 1 -->
+        <div class="project-card glass-card reveal-up" data-tilt>
+          <div class="project-image">
+            <div class="project-placeholder" style="background: linear-gradient(135deg, #0ff0fc33, #8b5cf633)">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div class="project-overlay">
+              <a href="https://github.com/wala2007" class="project-link" aria-label="View source">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-tags">
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>JavaScript</span>
+            </div>
+            <h3>Personal Portfolio Website</h3>
+            <p>A responsive portfolio website with cyberpunk theme, animations, and interactive UI components built with vanilla HTML, CSS, and JavaScript.</p>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card glass-card reveal-up" data-tilt style="transition-delay: 0.1s">
+          <div class="project-image">
+            <div class="project-placeholder" style="background: linear-gradient(135deg, #8b5cf633, #ec489933)">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            </div>
+            <div class="project-overlay">
+              <a href="https://github.com/wala2007" class="project-link" aria-label="View source">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-tags">
+              <span>C++</span>
+              <span>OOP</span>
+              <span>Data Structures</span>
+            </div>
+            <h3>Student Management System</h3>
+            <p>A console-based application built in C++ implementing OOP concepts, file handling, and data structures to manage student records efficiently.</p>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card glass-card reveal-up" data-tilt style="transition-delay: 0.2s">
+          <div class="project-image">
+            <div class="project-placeholder" style="background: linear-gradient(135deg, #10b98133, #0ff0fc33)">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <div class="project-overlay">
+              <a href="https://github.com/wala2007" class="project-link" aria-label="View source">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-tags">
+              <span>Python</span>
+              <span>Machine Learning</span>
+              <span>Pandas</span>
+            </div>
+            <h3>Data Analysis Tool</h3>
+            <p>A Python-based data analysis tool that processes and visualizes datasets using pandas and matplotlib, with features for statistical analysis.</p>
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="project-card glass-card reveal-up" data-tilt style="transition-delay: 0.3s">
+          <div class="project-image">
+            <div class="project-placeholder" style="background: linear-gradient(135deg, #f59e0b33, #ef444433)">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <div class="project-overlay">
+              <a href="https://github.com/wala2007" class="project-link" aria-label="View source">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-tags">
+              <span>Arduino</span>
+              <span>IoT</span>
+              <span>Sensors</span>
+            </div>
+            <h3>Smart Home Monitoring</h3>
+            <p>An IoT project using Arduino and various sensors to monitor temperature, humidity, and motion, with data logging capabilities.</p>
+          </div>
+        </div>
+
+        <!-- Project 5 -->
+        <div class="project-card glass-card reveal-up" data-tilt style="transition-delay: 0.4s">
+          <div class="project-image">
+            <div class="project-placeholder" style="background: linear-gradient(135deg, #8b5cf633, #10b98133)">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <div class="project-overlay">
+              <a href="https://github.com/wala2007" class="project-link" aria-label="View source">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-tags">
+              <span>React</span>
+              <span>Node.js</span>
+              <span>MongoDB</span>
+            </div>
+            <h3>Task Manager App</h3>
+            <p>A full-stack web application for task management with user authentication, real-time updates, and responsive design.</p>
+          </div>
+        </div>
+
+        <!-- Project 6 -->
+        <div class="project-card glass-card reveal-up" data-tilt style="transition-delay: 0.5s">
+          <div class="project-image">
+            <div class="project-placeholder" style="background: linear-gradient(135deg, #ec489933, #f59e0b33)">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div class="project-overlay">
+              <a href="https://github.com/wala2007" class="project-link" aria-label="View source">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-tags">
+              <span>Java</span>
+              <span>Algorithms</span>
+              <span>Data Structures</span>
+            </div>
+            <h3>Algorithm Visualizer</h3>
+            <p>An interactive Java application that visualizes sorting and searching algorithms with step-by-step animation and performance metrics.</p>
+          </div>
+        </div>
+      </template>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">// CONTACT</span>
+        <h2 class="section-title">Get In <span class="gradient-text">Touch</span></h2>
+        <p class="section-desc">Have a project in mind? Let's work together</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info reveal-left">
+          <div class="glass-card contact-card">
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=wala2eldine@gmail.com" class="contact-icon" aria-label="Email" target="_blank" rel="noopener noreferrer">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </a>
+            <div>
+              <h4>Email</h4>
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=wala2eldine@gmail.com" target="_blank" rel="noopener noreferrer">wala2eldine@gmail.com</a>
+            </div>
+          </div>
+          <div class="glass-card contact-card">
+            <a href="https://wa.me/963988737253" class="contact-icon" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </a>
+            <div>
+              <h4>Phone</h4>
+              <a href="https://wa.me/963988737253" target="_blank" rel="noopener noreferrer">+963988737253</a>
+            </div>
+          </div>
+          <div class="glass-card contact-card">
+            <a href="https://t.me/wala2eldine" class="contact-icon" aria-label="Telegram" target="_blank" rel="noopener noreferrer">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 4.5L2.5 12l7 2.5L12 22l4-5 5.5-12.5z"/><path d="M9.5 14.5L21.5 4.5"/><path d="M9.5 14.5l2.5 7.5"/></svg>
+            </a>
+            <div>
+              <h4>Telegram</h4>
+              <a href="wala2eldine" target="_blank" rel="noopener noreferrer">@wala2_eldine</a>
+            </div>
+          </div>
+          <div class="social-links">
+            <a href="https://github.com/wala2007" class="social-link glass-card" aria-label="GitHub">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </a>
+            <a href="https://www.instagram.com/wala2_2007" class="social-link glass-card" aria-label="Instagram">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1"/></svg>
+            </a>
+          </div>
+        </div>
+        <form class="contact-form glass-card reveal-right" id="contactForm">
+          <h3><span class="accent">&gt;</span> Send Message</h3>
+          <div class="form-group">
+            <input type="text" id="name" required placeholder=" " />
+            <label for="name">Your Name</label>
+            <div class="input-glow"></div>
+          </div>
+          <div class="form-group">
+            <input type="email" id="email" required placeholder=" " />
+            <label for="email">Your Email</label>
+            <div class="input-glow"></div>
+          </div>
+          <div class="form-group">
+            <input type="text" id="subject" required placeholder=" " />
+            <label for="subject">Subject</label>
+            <div class="input-glow"></div>
+          </div>
+          <div class="form-group">
+            <textarea id="message" rows="5" required placeholder=" "></textarea>
+            <label for="message">Your Message</label>
+            <div class="input-glow"></div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">
+            <span>Send Message</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="nav-logo">
+            <span class="logo-bracket">[</span>
+            <span class="logo-text">DEV</span>
+            <span class="logo-bracket">]</span>
+          </a>
+          <p>Building the future of web, one pixel at a time.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <a href="#hero">Home</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-links">
+          <h4>Resources</h4>
+          <a href="#">Resume</a>
+          <a href="#">Blog</a>
+          <a href="#">Tech Stack</a>
+          <a href="#">Open Source</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Walaa aldine alsaleh. Crafted with <span class="accent">♥</span> and <span class="gradient-text">code</span>.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="src/main.js"></script>
+</body>
+</html>
