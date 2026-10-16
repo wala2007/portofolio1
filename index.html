@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CyberPortfolio | Developer</title>
+  <title data-i18n="pageTitle">CyberPortfolio | Developer</title>
   <link rel="stylesheet" href="src/styles/main.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,13 +14,16 @@
   <div class="cursor-glow" id="cursorGlow"></div>
   <nav class="navbar" id="navbar">
     <div class="nav-container">
-      <a href="#" class="nav-logo"><span class="logo-bracket">[</span><span class="logo-text">DEV</span><span class="logo-bracket">]</span><span class="logo-cursor">_</span></a>
+      <div class="nav-brand">
+        <a href="#" class="nav-logo"><span class="logo-bracket">[</span><span class="logo-text">DEV</span><span class="logo-bracket">]</span><span class="logo-cursor">_</span></a>
+        <button class="language-toggle" id="languageToggle" type="button" aria-label="Switch to Arabic"><span class="language-code">ع</span><span data-i18n="languageButton">العربية</span></button>
+      </div>
       <div class="nav-toggle" id="navToggle" aria-label="Toggle navigation"><span></span><span></span><span></span></div>
       <ul class="nav-links" id="navLinks">
-        <li><a href="#hero" class="nav-link active">Home</a></li>
-        <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="#projects" class="nav-link">Projects</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
+        <li><a href="#hero" class="nav-link active" data-i18n="navHome">Home</a></li>
+        <li><a href="#about" class="nav-link" data-i18n="navAbout">About</a></li>
+        <li><a href="#projects" class="nav-link" data-i18n="navProjects">Projects</a></li>
+        <li><a href="#contact" class="nav-link" data-i18n="navContact">Contact</a></li>
       </ul>
     </div>
   </nav>
@@ -35,11 +38,11 @@
       <span class="code-line" style="--delay: 3s; --width: 72%">// Designing systems where hardware meets software</span>
     </div>
     <div class="hero-content">
-      <div class="hero-badge reveal-up"><span class="badge-dot"></span><span>Available for opportunities</span></div>
-      <h1 class="hero-title reveal-up"><span class="title-line">Walaa aldine</span><span class="title-line gradient-text">alsaleh</span><span class="title-line">Computer Engineering Student</span></h1>
-      <p class="hero-subtitle reveal-up">Computer Engineering student passionate about building innovative tech solutions and exploring the future of web development</p>
-      <div class="hero-buttons reveal-up"><a href="#projects" class="btn btn-primary"><span>View Projects</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a><a href="#contact" class="btn btn-secondary"><span>Contact Me</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a></div>
-      <div class="hero-stats reveal-up"><div class="stat-item"><span class="stat-number" data-target="3">0</span><span class="stat-suffix">+</span><span class="stat-label">Projects</span></div><div class="stat-divider"></div><div class="stat-item"><span class="stat-number" data-target="0">0</span><span class="stat-suffix"></span><span class="stat-label">Years Exp</span></div><div class="stat-divider"></div><div class="stat-item"><span class="stat-number" data-target="5">0</span><span class="stat-suffix">+</span><span class="stat-label">Courses</span></div></div>
+      <div class="hero-badge reveal-up"><span class="badge-dot"></span><span data-i18n="available">Available for opportunities</span></div>
+      <h1 class="hero-title reveal-up"><span class="title-line">Walaa aldine</span><span class="title-line gradient-text">alsaleh</span><span class="title-line" data-i18n="role">Computer Engineering Student</span></h1>
+      <p class="hero-subtitle reveal-up" data-i18n="heroSubtitle">Computer Engineering student passionate about building innovative tech solutions and exploring the future of web development</p>
+      <div class="hero-buttons reveal-up"><a href="#projects" class="btn btn-primary"><span data-i18n="viewProjects">View Projects</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a><a href="#contact" class="btn btn-secondary"><span data-i18n="contactMe">Contact Me</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a></div>
+      <div class="hero-stats reveal-up"><div class="stat-item"><span class="stat-number" data-target="3">0</span><span class="stat-suffix">+</span><span class="stat-label" data-i18n="projects">Projects</span></div><div class="stat-divider"></div><div class="stat-item"><span class="stat-number" data-target="0">0</span><span class="stat-suffix"></span><span class="stat-label" data-i18n="yearsExp">Years Exp</span></div><div class="stat-divider"></div><div class="stat-item"><span class="stat-number" data-target="5">0</span><span class="stat-suffix">+</span><span class="stat-label" data-i18n="courses">Courses</span></div></div>
     </div>
     <div class="hero-scroll-indicator"><div class="scroll-line"></div><span>SCROLL</span></div>
   </section>
@@ -47,13 +50,13 @@
     <div class="container">
       <div class="section-header reveal-up">
         <span class="section-tag">// ABOUT_ME</span>
-        <h2 class="section-title">About <span class="gradient-text">Me</span></h2>
-        <p class="section-desc">Get to know the developer behind the code</p>
+        <h2 class="section-title"><span data-i18n="about">About</span> <span class="gradient-text" data-i18n="me">Me</span></h2>
+        <p class="section-desc" data-i18n="aboutDesc">Get to know the developer behind the code</p>
       </div>
       <div class="about-grid">
         <div class="about-image reveal-left">
           <div class="image-frame">
-            <img class="profile-photo" src="src/assets/profile.jpg" alt="Walaa aldine alsaleh" />
+            <img class="profile-photo" src="src/assets/profile.jpg" alt="Walaa aldine alsaleh" data-i18n-alt="profileAlt" />
             <div class="frame-corner tl"></div>
             <div class="frame-corner tr"></div>
             <div class="frame-corner bl"></div>
@@ -65,18 +68,18 @@
         </div>
         <div class="about-content reveal-right">
           <div class="glass-card">
-            <h3><span class="accent">&gt;</span> Hello, I'm Walaa aldine alsaleh</h3>
-            <p>A passionate Computer Engineering student with a deep interest in software development, embedded systems, and modern web technologies. I'm constantly learning and building projects that push my understanding of how hardware and software work together.</p>
-            <p>My journey in computer engineering has equipped me with a strong foundation in programming, algorithms, and system design. I enjoy working on projects that combine creativity with technical problem-solving, from web applications to embedded systems.</p>
+            <h3><span class="accent">&gt;</span> <span data-i18n="hello">Hello, I'm Walaa aldine alsaleh</span></h3>
+            <p data-i18n="aboutText1">A passionate Computer Engineering student with a deep interest in software development, embedded systems, and modern web technologies. I'm constantly learning and building projects that push my understanding of how hardware and software work together.</p>
+            <p data-i18n="aboutText2">My journey in computer engineering has equipped me with a strong foundation in programming, algorithms, and system design. I enjoy working on projects that combine creativity with technical problem-solving, from web applications to embedded systems.</p>
             <div class="about-details">
-              <div class="detail-item"><span class="detail-label">Name:</span><span class="detail-value">Walaa aldine alsaleh</span></div>
-              <div class="detail-item"><span class="detail-label">Location:</span><span class="detail-value">Syria</span></div>
-              <div class="detail-item"><span class="detail-label">Experience:</span><span class="detail-value">Student / 0 Years</span></div>
-              <div class="detail-item"><span class="detail-label">Availability:</span><span class="detail-value status-available">Free for opportunities</span></div>
+              <div class="detail-item"><span class="detail-label" data-i18n="nameLabel">Name:</span><span class="detail-value">Walaa aldine alsaleh</span></div>
+              <div class="detail-item"><span class="detail-label" data-i18n="locationLabel">Location:</span><span class="detail-value" data-i18n="syria">Syria</span></div>
+              <div class="detail-item"><span class="detail-label" data-i18n="experienceLabel">Experience:</span><span class="detail-value" data-i18n="studentExperience">Student / 0 Years</span></div>
+              <div class="detail-item"><span class="detail-label" data-i18n="availabilityLabel">Availability:</span><span class="detail-value status-available" data-i18n="freeOpportunities">Free for opportunities</span></div>
             </div>
             <a href="src/assets/Walaa%20Aldine%20Alsaleh%20_%20Resume.pdf" class="btn btn-primary download-btn" target="_blank" rel="noopener noreferrer">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              <span>Download Resume</span>
+              <span data-i18n="downloadResume">Download Resume</span>
             </a>
           </div>
         </div>
@@ -85,14 +88,14 @@
   </section>
   <section class="section projects" id="projects">
     <div class="container">
-      <div class="section-header reveal-up"><span class="section-tag">// PROJECTS</span><h2 class="section-title">My <span class="gradient-text">Projects</span></h2><p class="section-desc">From raw ideas to polished digital experiences</p></div>
+      <div class="section-header reveal-up"><span class="section-tag">// PROJECTS</span><h2 class="section-title" data-i18n="projectsHeading">My <span class="gradient-text">Projects</span></h2><p class="section-desc" data-i18n="projectsDesc">From raw ideas to polished digital experiences</p></div>
       <article class="video-case-study glass-card reveal-up">
         <div class="video-case-study-copy">
           <span class="case-study-kicker">// AI_VIDEO_EDITING</span>
-          <h3>Turn simple handbag photos into a feature ad with the magic of <span class="gradient-text">AI</span></h3>
-          <p>I transform ordinary product images into cinematic advertising concepts, shaping the visual story from the first frame through to the final video.</p>
-          <div class="project-tags"><span>AI Video</span><span>Creative Direction</span><span>Product Ads</span></div>
-          <div class="case-study-meta"><span class="status-available"><span class="badge-dot"></span> Featured work</span><span>01 / 03</span></div>
+          <h3 data-i18n="bagcoTitle">Turn simple handbag photos into a feature ad with the magic of <span class="gradient-text">AI</span></h3>
+          <p data-i18n="bagcoDesc">I transform ordinary product images into cinematic advertising concepts, shaping the visual story from the first frame through to the final video.</p>
+          <div class="project-tags"><span data-i18n="aiVideo">AI Video</span><span data-i18n="creativeDirection">Creative Direction</span><span data-i18n="productAds">Product Ads</span></div>
+          <div class="case-study-meta"><span class="status-available"><span class="badge-dot"></span> <span data-i18n="featuredWork">Featured work</span></span><span>01 / 03</span></div>
         </div>
         <div class="video-workflow" aria-label="Bagco handbag AI video production workflow">
           <div class="workflow-stage workflow-input">
@@ -128,10 +131,10 @@
       <article class="video-case-study glass-card reveal-up">
         <div class="video-case-study-copy">
           <span class="case-study-kicker">// AI_VIDEO_EDITING</span>
-          <h3>Give an everyday handbag a cinematic story with <span class="gradient-text">AI</span></h3>
-          <p>I turn Olk handbag photography into a polished product advertisement with a clear visual rhythm from storyboard to final cut.</p>
-          <div class="project-tags"><span>AI Video</span><span>Creative Direction</span><span>Product Ads</span></div>
-          <div class="case-study-meta"><span class="status-available"><span class="badge-dot"></span> Featured work</span><span>02 / 03</span></div>
+          <h3 data-i18n="olkTitle">Give an everyday handbag a cinematic story with <span class="gradient-text">AI</span></h3>
+          <p data-i18n="olkDesc">I turn Olk handbag photography into a polished product advertisement with a clear visual rhythm from storyboard to final cut.</p>
+          <div class="project-tags"><span data-i18n="aiVideo">AI Video</span><span data-i18n="creativeDirection">Creative Direction</span><span data-i18n="productAds">Product Ads</span></div>
+          <div class="case-study-meta"><span class="status-available"><span class="badge-dot"></span> <span data-i18n="featuredWork">Featured work</span></span><span>02 / 03</span></div>
         </div>
         <div class="video-workflow" aria-label="Olk handbag AI video production workflow">
           <div class="workflow-stage workflow-input"><div class="workflow-stage-heading"><span class="workflow-index">01</span><span>Product Image</span></div><div class="product-photo-grid">
@@ -146,10 +149,10 @@
       <article class="video-case-study glass-card reveal-up">
         <div class="video-case-study-copy">
           <span class="case-study-kicker">// AI_VIDEO_EDITING</span>
-          <h3>Build a feature ad for a modern backpack with <span class="gradient-text">AI</span></h3>
-          <p>I shape WiWU backpack images into a focused product story, pairing a practical design with an energetic final video.</p>
-          <div class="project-tags"><span>AI Video</span><span>Creative Direction</span><span>Product Ads</span></div>
-          <div class="case-study-meta"><span class="status-available"><span class="badge-dot"></span> Featured work</span><span>03 / 03</span></div>
+          <h3 data-i18n="wiwuTitle">Build a feature ad for a modern backpack with <span class="gradient-text">AI</span></h3>
+          <p data-i18n="wiwuDesc">I shape WiWU backpack images into a focused product story, pairing a practical design with an energetic final video.</p>
+          <div class="project-tags"><span data-i18n="aiVideo">AI Video</span><span data-i18n="creativeDirection">Creative Direction</span><span data-i18n="productAds">Product Ads</span></div>
+          <div class="case-study-meta"><span class="status-available"><span class="badge-dot"></span> <span data-i18n="featuredWork">Featured work</span></span><span>03 / 03</span></div>
         </div>
         <div class="video-workflow" aria-label="WiWU backpack AI video production workflow">
           <div class="workflow-stage workflow-input"><div class="workflow-stage-heading"><span class="workflow-index">01</span><span>Product Image</span></div><div class="product-photo-grid">
@@ -308,8 +311,8 @@
     <div class="container">
       <div class="section-header reveal-up">
         <span class="section-tag">// CONTACT</span>
-        <h2 class="section-title">Get In <span class="gradient-text">Touch</span></h2>
-        <p class="section-desc">Have a project in mind? Let's work together</p>
+        <h2 class="section-title"><span data-i18n="getIn">Get In</span> <span class="gradient-text" data-i18n="touch">Touch</span></h2>
+        <p class="section-desc" data-i18n="contactDesc">Have a project in mind? Let's work together</p>
       </div>
       <div class="contact-grid">
         <div class="contact-info reveal-left">
@@ -318,7 +321,7 @@
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             </a>
             <div>
-              <h4>Email</h4>
+              <h4 data-i18n="email">Email</h4>
               <a href="https://mail.google.com/mail/?view=cm&fs=1&to=wala2eldine@gmail.com" target="_blank" rel="noopener noreferrer">wala2eldine@gmail.com</a>
             </div>
           </div>
@@ -327,7 +330,7 @@
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             </a>
             <div>
-              <h4>Phone</h4>
+              <h4 data-i18n="phone">Phone</h4>
               <a href="https://wa.me/963988737253" target="_blank" rel="noopener noreferrer">+963988737253</a>
             </div>
           </div>
@@ -336,7 +339,7 @@
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 4.5L2.5 12l7 2.5L12 22l4-5 5.5-12.5z"/><path d="M9.5 14.5L21.5 4.5"/><path d="M9.5 14.5l2.5 7.5"/></svg>
             </a>
             <div>
-              <h4>Telegram</h4>
+              <h4 data-i18n="telegram">Telegram</h4>
               <a href="wala2eldine" target="_blank" rel="noopener noreferrer">@wala2_eldine</a>
             </div>
           </div>
@@ -350,29 +353,29 @@
           </div>
         </div>
         <form class="contact-form glass-card reveal-right" id="contactForm">
-          <h3><span class="accent">&gt;</span> Send Message</h3>
+          <h3><span class="accent">&gt;</span> <span data-i18n="sendMessage">Send Message</span></h3>
           <div class="form-group">
             <input type="text" id="name" required placeholder=" " />
-            <label for="name">Your Name</label>
+            <label for="name" data-i18n="yourName">Your Name</label>
             <div class="input-glow"></div>
           </div>
           <div class="form-group">
             <input type="email" id="email" required placeholder=" " />
-            <label for="email">Your Email</label>
+            <label for="email" data-i18n="yourEmail">Your Email</label>
             <div class="input-glow"></div>
           </div>
           <div class="form-group">
             <input type="text" id="subject" required placeholder=" " />
-            <label for="subject">Subject</label>
+            <label for="subject" data-i18n="subject">Subject</label>
             <div class="input-glow"></div>
           </div>
           <div class="form-group">
             <textarea id="message" rows="5" required placeholder=" "></textarea>
-            <label for="message">Your Message</label>
+            <label for="message" data-i18n="yourMessage">Your Message</label>
             <div class="input-glow"></div>
           </div>
           <button type="submit" class="btn btn-primary btn-full">
-            <span>Send Message</span>
+            <span data-i18n="sendMessage">Send Message</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
           </button>
         </form>
@@ -390,27 +393,27 @@
             <span class="logo-text">DEV</span>
             <span class="logo-bracket">]</span>
           </a>
-          <p>Building the future of web, one pixel at a time.</p>
+          <p data-i18n="footerIntro">Building the future of web, one pixel at a time.</p>
         </div>
         <div class="footer-links">
-          <h4>Quick Links</h4>
-          <a href="#hero">Home</a>
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
+          <h4 data-i18n="quickLinks">Quick Links</h4>
+          <a href="#hero" data-i18n="navHome">Home</a>
+          <a href="#projects" data-i18n="navProjects">Projects</a>
+          <a href="#contact" data-i18n="navContact">Contact</a>
         </div>
         <div class="footer-links">
-          <h4>Resources</h4>
-          <a href="#">Resume</a>
-          <a href="#">Blog</a>
-          <a href="#">Tech Stack</a>
-          <a href="#">Open Source</a>
+          <h4 data-i18n="resources">Resources</h4>
+          <a href="#" data-i18n="resume">Resume</a>
+          <a href="#" data-i18n="blog">Blog</a>
+          <a href="#" data-i18n="techStack">Tech Stack</a>
+          <a href="#" data-i18n="openSource">Open Source</a>
         </div>
       </div>
       <div class="footer-bottom">
         <p>&copy; 2026 Walaa aldine alsaleh. Crafted with <span class="accent">♥</span> and <span class="gradient-text">code</span>.</p>
         <div class="footer-bottom-links">
-          <a href="#">Privacy</a>
-          <a href="#">Terms</a>
+          <a href="#" data-i18n="privacy">Privacy</a>
+          <a href="#" data-i18n="terms">Terms</a>
         </div>
       </div>
     </div>

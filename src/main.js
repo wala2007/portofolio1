@@ -304,6 +304,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // === Language Switcher ===
+  const languageToggle = document.getElementById('languageToggle');
+  const translations = {
+    en: {
+      pageTitle: 'CyberPortfolio | Developer', navHome: 'Home', navAbout: 'About', navProjects: 'Projects', navContact: 'Contact', languageButton: 'العربية', available: 'Available for opportunities', role: 'Computer Engineering Student', heroSubtitle: 'Computer Engineering student passionate about building innovative tech solutions and exploring the future of web development', viewProjects: 'View Projects', contactMe: 'Contact Me', projects: 'Projects', projectsHeading: 'My <span class="gradient-text">Projects</span>', yearsExp: 'Years Exp', courses: 'Courses', about: 'About', me: 'Me', aboutDesc: 'Get to know the developer behind the code', hello: "Hello, I'm Walaa aldine alsaleh", aboutText1: "A passionate Computer Engineering student with a deep interest in software development, embedded systems, and modern web technologies. I'm constantly learning and building projects that push my understanding of how hardware and software work together.", aboutText2: 'My journey in computer engineering has equipped me with a strong foundation in programming, algorithms, and system design. I enjoy working on projects that combine creativity with technical problem-solving, from web applications to embedded systems.', nameLabel: 'Name:', locationLabel: 'Location:', syria: 'Syria', experienceLabel: 'Experience:', studentExperience: 'Student / 0 Years', availabilityLabel: 'Availability:', freeOpportunities: 'Free for opportunities', downloadResume: 'Download Resume', projectsDesc: 'From raw ideas to polished digital experiences', bagcoTitle: 'Turn simple handbag photos into a feature ad with the magic of <span class="gradient-text">AI</span>', bagcoDesc: 'I transform ordinary product images into cinematic advertising concepts, shaping the visual story from the first frame through to the final video.', olkTitle: 'Give an everyday handbag a cinematic story with <span class="gradient-text">AI</span>', olkDesc: 'I turn Olk handbag photography into a polished product advertisement with a clear visual rhythm from storyboard to final cut.', wiwuTitle: 'Build a feature ad for a modern backpack with <span class="gradient-text">AI</span>', wiwuDesc: 'I shape WiWU backpack images into a focused product story, pairing a practical design with an energetic final video.', aiVideo: 'AI Video', creativeDirection: 'Creative Direction', productAds: 'Product Ads', featuredWork: 'Featured work', productImage: 'Product Image', storyboard: 'Storyboard', finalVideo: 'Final Video', getAiVideo: 'Get Your AI Video', getIn: 'Get In', touch: 'Touch', contactDesc: "Have a project in mind? Let's work together", email: 'Email', phone: 'Phone', telegram: 'Telegram', sendMessage: 'Send Message', yourName: 'Your Name', yourEmail: 'Your Email', subject: 'Subject', yourMessage: 'Your Message', footerIntro: 'Building the future of web, one pixel at a time.', quickLinks: 'Quick Links', resources: 'Resources', resume: 'Resume', blog: 'Blog', techStack: 'Tech Stack', openSource: 'Open Source', privacy: 'Privacy', terms: 'Terms', profileAlt: 'Walaa aldine alsaleh'
+    },
+    ar: {
+      pageTitle: 'محفظة سايبر | مطوّر', navHome: 'الرئيسية', navAbout: 'نبذة عني', navProjects: 'المشاريع', navContact: 'تواصل معي', languageButton: 'English', available: 'متاح للفرص', role: 'طالب هندسة حاسوب', heroSubtitle: 'طالب هندسة حاسوب شغوف ببناء حلول تقنية مبتكرة واستكشاف مستقبل تطوير الويب', viewProjects: 'استعرض المشاريع', contactMe: 'تواصل معي', projects: 'المشاريع', projectsHeading: 'مشاريعي', yearsExp: 'سنوات الخبرة', courses: 'الدورات', about: 'نبذة', me: 'عني', aboutDesc: 'تعرّف على المطوّر خلف الشيفرة', hello: 'مرحباً، أنا ولاء الدين الصالح', aboutText1: 'طالب هندسة حاسوب شغوف بتطوير البرمجيات والأنظمة المضمنة وتقنيات الويب الحديثة. أواصل التعلم وبناء المشاريع التي توسّع فهمي لكيفية عمل العتاد والبرمجيات معاً.', aboutText2: 'منحتني رحلتي في هندسة الحاسوب أساساً قوياً في البرمجة والخوارزميات وتصميم الأنظمة. أستمتع بالمشاريع التي تجمع الإبداع مع حل المشكلات التقنية، من تطبيقات الويب إلى الأنظمة المضمنة.', nameLabel: 'الاسم:', locationLabel: 'الموقع:', syria: 'سوريا', experienceLabel: 'الخبرة:', studentExperience: 'طالب / 0 سنوات', availabilityLabel: 'التفرغ:', freeOpportunities: 'متاح للفرص', downloadResume: 'تحميل السيرة الذاتية', projectsDesc: 'من الأفكار الأولية إلى التجارب الرقمية المتقنة', bagcoTitle: 'تحويل صور حقيبة بسيطة إلى إعلان مميز بسحر <span class="gradient-text">الذكاء الاصطناعي</span>', bagcoDesc: 'أحوّل صور المنتجات العادية إلى أفكار إعلانية سينمائية، وأبني القصة البصرية من اللقطة الأولى حتى الفيديو النهائي.', olkTitle: 'منح حقيبة يومية قصة سينمائية باستخدام <span class="gradient-text">الذكاء الاصطناعي</span>', olkDesc: 'أحوّل صور حقائب Olk إلى إعلان منتج متكامل بإيقاع بصري واضح، من لوحة القصة إلى المونتاج النهائي.', wiwuTitle: 'بناء إعلان مميز لحقيبة ظهر عصرية باستخدام <span class="gradient-text">الذكاء الاصطناعي</span>', wiwuDesc: 'أصوغ صور حقائب WiWU في قصة منتج مركزة تجمع التصميم العملي بفيديو نهائي حيوي.', aiVideo: 'فيديو بالذكاء الاصطناعي', creativeDirection: 'إخراج إبداعي', productAds: 'إعلانات منتجات', featuredWork: 'عمل مميز', productImage: 'صورة المنتج', storyboard: 'لوحة القصة', finalVideo: 'الفيديو النهائي', getAiVideo: 'احصل على فيديو بالذكاء الاصطناعي', getIn: 'تواصل', touch: 'معي', contactDesc: 'لديك مشروع في ذهنك؟ لنعمل معاً', email: 'البريد الإلكتروني', phone: 'الهاتف', telegram: 'تلغرام', sendMessage: 'إرسال رسالة', yourName: 'اسمك', yourEmail: 'بريدك الإلكتروني', subject: 'الموضوع', yourMessage: 'رسالتك', footerIntro: 'نبني مستقبل الويب، بكسل واحد في كل مرة.', quickLinks: 'روابط سريعة', resources: 'المصادر', resume: 'السيرة الذاتية', blog: 'المدونة', techStack: 'التقنيات', openSource: 'المصادر المفتوحة', privacy: 'الخصوصية', terms: 'الشروط', profileAlt: 'ولاء الدين الصالح'
+    }
+  };
+
+  function setLanguage(language) {
+    const dictionary = translations[language];
+    document.documentElement.lang = language;
+    document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+    document.title = dictionary.pageTitle;
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+      element.innerHTML = dictionary[element.dataset.i18n];
+    });
+    document.querySelectorAll('[data-i18n-alt]').forEach(element => {
+      element.alt = dictionary[element.dataset.i18nAlt];
+    });
+    document.querySelectorAll('.workflow-stage-heading span:last-child').forEach(element => {
+      const key = element.textContent.trim() === 'Product Image' || element.textContent.trim() === 'صورة المنتج' ? 'productImage' : element.textContent.trim() === 'Storyboard' || element.textContent.trim() === 'لوحة القصة' ? 'storyboard' : 'finalVideo';
+      element.textContent = dictionary[key];
+    });
+    document.querySelectorAll('.workflow-cta span').forEach(element => {
+      element.textContent = dictionary.getAiVideo;
+    });
+    languageToggle.setAttribute('aria-label', language === 'ar' ? 'Switch to English' : 'Switch to Arabic');
+    localStorage.setItem('portfolio-language', language);
+  }
+
+  const savedLanguage = localStorage.getItem('portfolio-language') || 'en';
+  setLanguage(savedLanguage);
+  languageToggle.addEventListener('click', () => setLanguage(document.documentElement.lang === 'en' ? 'ar' : 'en'));
+
   // === Initialize ===
   handleScroll();
   highlightNavLink();
