@@ -27,6 +27,7 @@
   --font-display: 'Orbitron', sans-serif;
   --font-body: 'Rajdhani', sans-serif;
   --font-mono: 'Share Tech Mono', monospace;
+  --font-arabic: 'Markazi Text', serif;
 
   --border-glass: 1px solid rgba(15, 240, 252, 0.15);
   --radius: 12px;
@@ -1529,6 +1530,68 @@ body:hover .cursor-glow {
     height: 1px;
     width: 50px;
   }
+}
+
+html[dir="rtl"] body {
+  font-family: var(--font-arabic);
+  font-weight: 400;
+}
+
+html[dir="rtl"] .nav-logo,
+html[dir="rtl"] .code-line {
+  font-family: var(--font-display);
+}
+
+html[dir="rtl"] .nav-link {
+  font-family: var(--font-arabic);
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+html[dir="rtl"] .language-toggle,
+html[dir="rtl"] .btn {
+  font-family: var(--font-arabic);
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+html[dir="rtl"] .hero-title .title-line:last-child {
+  font-family: var(--font-arabic);
+  font-weight: 700;
+}
+
+html[dir="rtl"] .hero-subtitle,
+html[dir="rtl"] .section-desc,
+html[dir="rtl"] .about-content p,
+html[dir="rtl"] .video-case-study-copy p,
+html[dir="rtl"] .footer-brand p {
+  font-family: var(--font-arabic);
+  font-size: 20px;
+  font-weight: 400;
+}
+
+html[dir="rtl"] .section-title,
+html[dir="rtl"] .about-content h3,
+html[dir="rtl"] .video-case-study-copy h3,
+html[dir="rtl"] .contact-form h3 {
+  font-family: var(--font-arabic);
+  font-weight: 700;
+}
+
+html[dir="rtl"] .stat-label,
+html[dir="rtl"] .detail-label,
+html[dir="rtl"] .detail-value,
+html[dir="rtl"] .contact-card h4,
+html[dir="rtl"] .contact-card a,
+html[dir="rtl"] .form-group label,
+html[dir="rtl"] .footer-links h4,
+html[dir="rtl"] .footer-links a,
+html[dir="rtl"] .footer-bottom,
+html[dir="rtl"] .workflow-stage-heading,
+html[dir="rtl"] .workflow-cta {
+  font-family: var(--font-arabic);
+  font-weight: 500;
 }
 
 html[dir="rtl"] .workflow-arrow {
