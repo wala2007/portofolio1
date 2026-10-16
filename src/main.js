@@ -333,6 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.workflow-cta span').forEach(element => {
       element.textContent = dictionary.getAiVideo;
     });
+    document.querySelector('.language-code').textContent = language === 'en' ? 'ع' : 'E';
     languageToggle.setAttribute('aria-label', language === 'ar' ? 'Switch to English' : 'Switch to Arabic');
     localStorage.setItem('portfolio-language', language);
   }
