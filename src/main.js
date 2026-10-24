@@ -399,12 +399,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
-  // 7. PROJECT FILTERING & ISOMETRIC 3D SNAPPING TOGGLE
+  // 7. PROJECT FILTERING
   // ==========================================================================
   const filterTabs = document.querySelectorAll('.filter-tab');
   const projectGroups = document.querySelectorAll('.project-group');
-  const isometricToggle = document.getElementById('isometricToggle');
-  const projectsCanvas = document.getElementById('projectsCanvas');
 
   // Filter Tabs
   filterTabs.forEach(tab => {
@@ -431,22 +429,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   });
-
-  // Isometric 3D Snapping Toggle
-  if (isometricToggle && projectsCanvas) {
-    isometricToggle.addEventListener('click', () => {
-      const isCurrentlyIso = projectsCanvas.classList.contains('isometric-active');
-      if (isCurrentlyIso) {
-        projectsCanvas.classList.remove('isometric-active');
-        isometricToggle.classList.remove('active');
-        isometricToggle.setAttribute('aria-pressed', 'false');
-      } else {
-        projectsCanvas.classList.add('isometric-active');
-        isometricToggle.classList.add('active');
-        isometricToggle.setAttribute('aria-pressed', 'true');
-      }
-    });
-  }
 
   // ==========================================================================
   // 8. CONTACT FORM WITH SNAPPY VALIDATION FEEDBACK
