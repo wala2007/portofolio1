@@ -1097,9 +1097,10 @@ body:hover .cursor-glow {
 
 .workflow-storyboard img {
   width: 100%;
-  aspect-ratio: 4/5;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   border-radius: 8px;
+  display: block;
 }
 
 .workflow-stage.workflow-output {
@@ -1112,21 +1113,18 @@ body:hover .cursor-glow {
   width: 100%;
   border-radius: 8px;
   overflow: hidden;
-  background: #000;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.4);
 }
 
 .workflow-video video {
   width: 100%;
-  max-width: 250px;
-  aspect-ratio: 9 / 16;
   height: auto;
+  max-height: 480px;
   object-fit: contain;
   border-radius: 8px;
-  background: #000;
   display: block;
 }
 
@@ -1591,8 +1589,7 @@ body:hover .cursor-glow {
 
   .workflow-video video {
     width: 100%;
-    max-width: 280px;
-    aspect-ratio: 9 / 16;
+    max-width: 320px;
     height: auto;
     margin: 0 auto;
     object-fit: contain;
