@@ -1,133 +1,136 @@
-/* ============================================
-   CYBERPUNK PORTFOLIO - MAIN JAVASCRIPT
-   ============================================ */
+/* ==========================================================================
+   ANTIGRAVITY UI & MOTION ENGINE - MAIN JAVASCRIPT
+   GSAP 3 + ScrollTrigger + Spatial 3D + Bilingual i18n
+   ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // === Starfield Animation ===
+  // ==========================================================================
+  // 1. STARFIELD & COSMIC PARTICLES (PERFORMANCE OPTIMIZED)
+  // ==========================================================================
   const canvas = document.getElementById('starfield');
-  const ctx = canvas.getContext('2d');
-  let stars = [];
-  let shootingStars = [];
-  let width, height;
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    let width, height;
+    let animationFrameId;
 
-  function resizeCanvas() {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-  }
-
-  function createStars(count) {
-    stars = [];
-    for (let i = 0; i < count; i++) {
-      stars.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        radius: Math.random() * 1.5 + 0.3,
-        speed: Math.random() * 0.3 + 0.1,
-        opacity: Math.random() * 0.8 + 0.2,
-        twinkleSpeed: Math.random() * 0.02 + 0.005,
-        twinkleOffset: Math.random() * Math.PI * 2
-      });
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
     }
-  }
 
-  function createShootingStar() {
-    if (Math.random() < 0.005) {
-      shootingStars.push({
-        x: Math.random() * width,
-        y: 0,
-        length: Math.random() * 100 + 50,
-        speed: Math.random() * 8 + 4,
-        angle: Math.PI / 4 + (Math.random() * 0.3 - 0.15),
-        opacity: 1,
-        decay: Math.random() * 0.02 + 0.01
-      });
+    function createStars(count) {
+      stars = [];
+      for (let i = 0; i < count; i++) {
+        stars.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          radius: Math.random() * 1.4 + 0.3,
+          speed: Math.random() * 0.25 + 0.08,
+          opacity: Math.random() * 0.7 + 0.2,
+          twinkleSpeed: Math.random() * 0.015 + 0.005,
+          twinkleOffset: Math.random() * Math.PI * 2
+        });
+      }
     }
-  }
 
-  function drawStars(time) {
-    ctx.clearRect(0, 0, width, height);
+    function renderStarfield(time) {
+      ctx.clearRect(0, 0, width, height);
 
-    stars.forEach(star => {
-      const twinkle = Math.sin(time * star.twinkleSpeed + star.twinkleOffset) * 0.3 + 0.7;
-      ctx.beginPath();
-      ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(15, 240, 252, ${star.opacity * twinkle})`;
-      ctx.fill();
+      stars.forEach(star => {
+        const twinkle = Math.sin(time * star.twinkleSpeed + star.twinkleOffset) * 0.25 + 0.75;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(56, 189, 248, ${star.opacity * twinkle})`;
+        ctx.fill();
 
-      star.y += star.speed;
-      if (star.y > height) {
-        star.y = 0;
-        star.x = Math.random() * width;
+        star.y -= star.speed; // Floating weightless upwards
+        if (star.y < 0) {
+          star.y = height;
+          star.x = Math.random() * width;
+        }
+      });
+
+      if (!document.hidden && !prefersReducedMotion) {
+        animationFrameId = requestAnimationFrame(renderStarfield);
+      }
+    }
+
+    resizeCanvas();
+    createStars(window.innerWidth < 768 ? 80 : 160);
+
+    if (!prefersReducedMotion) {
+      animationFrameId = requestAnimationFrame(renderStarfield);
+    } else {
+      renderStarfield(0); // Single static draw for reduced-motion
+    }
+
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      createStars(window.innerWidth < 768 ? 80 : 160);
+      if (prefersReducedMotion) renderStarfield(0);
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (!prefersReducedMotion) {
+        if (document.hidden) {
+          cancelAnimationFrame(animationFrameId);
+        } else {
+          animationFrameId = requestAnimationFrame(renderStarfield);
+        }
       }
     });
-
-    createShootingStar();
-    shootingStars = shootingStars.filter(s => {
-      s.x += Math.cos(s.angle) * s.speed;
-      s.y += Math.sin(s.angle) * s.speed;
-      s.opacity -= s.decay;
-
-      ctx.beginPath();
-      ctx.moveTo(s.x, s.y);
-      ctx.lineTo(
-        s.x - Math.cos(s.angle) * s.length,
-        s.y - Math.sin(s.angle) * s.length
-      );
-      ctx.strokeStyle = `rgba(15, 240, 252, ${s.opacity})`;
-      ctx.lineWidth = 1.5;
-      ctx.stroke();
-
-      return s.opacity > 0 && s.y < height + 100 && s.x > -100 && s.x < width + 100;
-    });
-
-    requestAnimationFrame(drawStars);
   }
 
-  resizeCanvas();
-  createStars(250);
-  requestAnimationFrame(drawStars);
-  window.addEventListener('resize', () => {
-    resizeCanvas();
-    createStars(250);
-  });
-
-  // === Cursor Glow ===
+  // ==========================================================================
+  // 2. CURSOR GLOW INTERACTION
+  // ==========================================================================
   const cursorGlow = document.getElementById('cursorGlow');
-  let mouseX = 0, mouseY = 0;
+  if (cursorGlow && !prefersReducedMotion && window.matchMedia('(pointer: fine)').matches) {
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let targetX = mouseX;
+    let targetY = mouseY;
 
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    cursorGlow.style.left = mouseX + 'px';
-    cursorGlow.style.top = mouseY + 'px';
-  });
+    window.addEventListener('mousemove', (e) => {
+      targetX = e.clientX;
+      targetY = e.clientY;
+    });
 
-  // === Navbar Scroll Behavior ===
+    function updateCursor() {
+      mouseX += (targetX - mouseX) * 0.15;
+      mouseY += (targetY - mouseY) * 0.15;
+      cursorGlow.style.left = `${mouseX}px`;
+      cursorGlow.style.top = `${mouseY}px`;
+      requestAnimationFrame(updateCursor);
+    }
+    updateCursor();
+  }
+
+  // ==========================================================================
+  // 3. NAVBAR SCROLL & ACTIVE LINK STATE
+  // ==========================================================================
   const navbar = document.getElementById('navbar');
+  const navToggle = document.getElementById('navToggle');
+  const navLinksContainer = document.getElementById('navLinks');
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
 
-  function handleScroll() {
-    if (window.scrollY > 50) {
+  function updateNavbar() {
+    if (window.scrollY > 40) {
       navbar.classList.add('scrolled');
     } else {
       navbar.classList.remove('scrolled');
     }
-  }
 
-  window.addEventListener('scroll', handleScroll);
-
-  // === Active Nav Link ===
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-link');
-
-  function highlightNavLink() {
-    const scrollPos = window.scrollY + 100;
-
-    sections.forEach(section => {
-      const top = section.offsetTop;
-      const height = section.offsetHeight;
-      const id = section.getAttribute('id');
-
+    // Highlight active section
+    const scrollPos = window.scrollY + 120;
+    sections.forEach(sec => {
+      const top = sec.offsetTop;
+      const height = sec.offsetHeight;
+      const id = sec.getAttribute('id');
       if (scrollPos >= top && scrollPos < top + height) {
         navLinks.forEach(link => {
           link.classList.remove('active');
@@ -139,211 +142,539 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  window.addEventListener('scroll', highlightNavLink);
+  window.addEventListener('scroll', updateNavbar, { passive: true });
+  updateNavbar();
 
-  // === Mobile Nav Toggle ===
-  const navToggle = document.getElementById('navToggle');
-  const navLinksContainer = document.getElementById('navLinks');
-
-  navToggle.addEventListener('click', () => {
-    navToggle.classList.toggle('active');
-    navLinksContainer.classList.toggle('active');
-  });
-
-  navLinksContainer.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-      navToggle.classList.remove('active');
-      navLinksContainer.classList.remove('active');
+  if (navToggle && navLinksContainer) {
+    navToggle.addEventListener('click', () => {
+      navLinksContainer.classList.toggle('active');
     });
-  });
 
-  // === Scroll Reveal Animation ===
-  const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
-
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('revealed');
-      }
+    navLinksContainer.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinksContainer.classList.remove('active');
+      });
     });
-  }, {
-    threshold: 0.15,
-    rootMargin: '0px 0px -50px 0px'
-  });
-
-  revealElements.forEach(el => revealObserver.observe(el));
-
-  // === Skill Bar Animation ===
-  const skillFills = document.querySelectorAll('.skill-fill');
-
-  const skillObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const width = entry.target.getAttribute('data-width');
-        entry.target.style.width = width + '%';
-        skillObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.3 });
-
-  skillFills.forEach(fill => skillObserver.observe(fill));
-
-  // === Stat Counter Animation ===
-  const statNumbers = document.querySelectorAll('.stat-number');
-
-  const statObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const target = parseInt(entry.target.getAttribute('data-target'));
-        animateCounter(entry.target, target);
-        statObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.5 });
-
-  statNumbers.forEach(num => statObserver.observe(num));
-
-  function animateCounter(element, target) {
-    let current = 0;
-    const increment = target / 60;
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= target) {
-        current = target;
-        clearInterval(timer);
-      }
-      element.textContent = Math.floor(current);
-    }, 25);
   }
 
-  // === Project Card Tilt Effect ===
-  const tiltCards = document.querySelectorAll('[data-tilt]');
-
-  tiltCards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      const rotateX = ((y - centerY) / centerY) * -8;
-      const rotateY = ((x - centerX) / centerX) * 8;
-
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
-    });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-    });
-  });
-
-  // === Smooth Scroll for Anchor Links ===
+  // Smooth scroll with offset
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
+    anchor.addEventListener('click', function (e) {
       const targetId = this.getAttribute('href');
       if (targetId === '#') return;
       const target = document.querySelector(targetId);
       if (target) {
-        const offset = 80;
-        const top = target.getBoundingClientRect().top + window.scrollY - offset;
-        window.scrollTo({ top, behavior: 'smooth' });
+        e.preventDefault();
+        const top = target.getBoundingClientRect().top + window.scrollY - 85;
+        window.scrollTo({ top, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
       }
     });
   });
 
-  // === Contact Form Handling ===
+  // ==========================================================================
+  // 4. GSAP & SCROLLTRIGGER MOTION SEQUENCES (STAGGER 0.1s + PARALLAX)
+  // ==========================================================================
+  if (window.gsap && window.ScrollTrigger && !prefersReducedMotion) {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero entrance staggered sequence (0.1s interval)
+    const heroElements = [
+      '.hero-badge',
+      '.hero-title',
+      '.hero-desc',
+      '.hero-cta-group',
+      '.hero-stats'
+    ];
+
+    gsap.set(heroElements, { willChange: 'transform, opacity' });
+    gsap.from(heroElements, {
+      y: 35,
+      opacity: 0,
+      duration: 0.9,
+      stagger: 0.1,
+      ease: 'power3.out',
+      onComplete: () => {
+        gsap.set(heroElements, { willChange: 'auto' });
+      }
+    });
+
+    // Spatial Hero Showcase Entrance
+    gsap.from('#spatialStack', {
+      scale: 0.85,
+      opacity: 0,
+      duration: 1.2,
+      delay: 0.2,
+      ease: 'power3.out'
+    });
+
+    // Multi-layer Scroll Parallax on Background Grid & Elements
+    const heroGrid = document.querySelector('.hero-grid-overlay');
+    if (heroGrid) {
+      gsap.to(heroGrid, {
+        y: 140,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true
+        }
+      });
+    }
+
+    // Hero Content gentle fade & float on scroll
+    const heroContent = document.querySelector('.hero-content');
+    if (heroContent) {
+      gsap.to(heroContent, {
+        y: 80,
+        opacity: 0.4,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true
+        }
+      });
+    }
+
+    // About Section Staggered Entrance
+    ScrollTrigger.batch('.about-grid > *', {
+      start: 'top 85%',
+      onEnter: (batch) => {
+        gsap.set(batch, { willChange: 'transform, opacity' });
+        gsap.from(batch, {
+          y: 40,
+          opacity: 0,
+          stagger: 0.15,
+          duration: 0.8,
+          ease: 'power3.out',
+          onComplete: () => gsap.set(batch, { willChange: 'auto' })
+        });
+      },
+      once: true
+    });
+
+    // Video Case Studies Entrance
+    ScrollTrigger.batch('.video-case-study', {
+      start: 'top 85%',
+      onEnter: (batch) => {
+        gsap.set(batch, { willChange: 'transform, opacity' });
+        gsap.from(batch, {
+          y: 50,
+          opacity: 0,
+          duration: 0.9,
+          stagger: 0.15,
+          ease: 'power3.out',
+          onComplete: () => gsap.set(batch, { willChange: 'auto' })
+        });
+      },
+      once: true
+    });
+
+    // Software Cards Grid Stagger
+    ScrollTrigger.batch('.software-card', {
+      start: 'top 88%',
+      onEnter: (batch) => {
+        gsap.set(batch, { willChange: 'transform, opacity' });
+        gsap.from(batch, {
+          y: 45,
+          opacity: 0,
+          scale: 0.96,
+          duration: 0.75,
+          stagger: 0.1, // Stagger entrance animations by 0.1s
+          ease: 'power3.out',
+          onComplete: () => gsap.set(batch, { willChange: 'auto' })
+        });
+      },
+      once: true
+    });
+
+    // Contact Section Stagger
+    ScrollTrigger.batch('.contact-channel-card, .contact-socials-row, .contact-form', {
+      start: 'top 85%',
+      onEnter: (batch) => {
+        gsap.set(batch, { willChange: 'transform, opacity' });
+        gsap.from(batch, {
+          y: 35,
+          opacity: 0,
+          stagger: 0.1,
+          duration: 0.8,
+          ease: 'power3.out',
+          onComplete: () => gsap.set(batch, { willChange: 'auto' })
+        });
+      },
+      once: true
+    });
+  }
+
+  // ==========================================================================
+  // 5. STAT COUNTER ANIMATION
+  // ==========================================================================
+  const statNumbers = document.querySelectorAll('.stat-number');
+  if (statNumbers.length > 0) {
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.getAttribute('data-target'), 10) || 0;
+          let current = 0;
+          const duration = 1200;
+          const stepTime = 30;
+          const steps = duration / stepTime;
+          const increment = target / steps;
+
+          const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+              el.textContent = target;
+              clearInterval(timer);
+            } else {
+              el.textContent = Math.floor(current);
+            }
+          }, stepTime);
+
+          statObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    statNumbers.forEach(n => statObserver.observe(n));
+  }
+
+  // ==========================================================================
+  // 6. SPATIAL 3D CARD TILT (WITH GSAP INTERPOLATION & WILL-CHANGE HYGIENE)
+  // ==========================================================================
+  const tiltElements = document.querySelectorAll('[data-tilt]');
+  if (!prefersReducedMotion && window.matchMedia('(pointer: fine)').matches) {
+    tiltElements.forEach(el => {
+      let isHovered = false;
+
+      el.addEventListener('mouseenter', () => {
+        isHovered = true;
+        el.style.willChange = 'transform';
+      });
+
+      el.addEventListener('mousemove', (e) => {
+        if (!isHovered) return;
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -7;
+        const rotateY = ((x - centerX) / centerX) * 7;
+
+        if (window.gsap) {
+          gsap.to(el, {
+            rotationX: rotateX,
+            rotationY: rotateY,
+            transformPerspective: 1200,
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+        } else {
+          el.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        }
+      });
+
+      el.addEventListener('mouseleave', () => {
+        isHovered = false;
+        if (window.gsap) {
+          gsap.to(el, {
+            rotationX: 0,
+            rotationY: 0,
+            duration: 0.5,
+            ease: 'power2.out',
+            onComplete: () => {
+              el.style.willChange = 'auto';
+            }
+          });
+        } else {
+          el.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg)';
+          el.style.willChange = 'auto';
+        }
+      });
+    });
+  }
+
+  // ==========================================================================
+  // 7. PROJECT FILTERING & ISOMETRIC 3D SNAPPING TOGGLE
+  // ==========================================================================
+  const filterTabs = document.querySelectorAll('.filter-tab');
+  const projectGroups = document.querySelectorAll('.project-group');
+  const isometricToggle = document.getElementById('isometricToggle');
+  const projectsCanvas = document.getElementById('projectsCanvas');
+
+  // Filter Tabs
+  filterTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      filterTabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+
+      const filter = tab.getAttribute('data-filter');
+
+      projectGroups.forEach(group => {
+        const cat = group.getAttribute('data-category');
+        if (filter === 'all' || filter === cat) {
+          group.classList.add('active-group');
+          if (window.gsap && !prefersReducedMotion) {
+            gsap.fromTo(group, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' });
+          }
+        } else {
+          group.classList.remove('active-group');
+        }
+      });
+    });
+  });
+
+  // Isometric 3D Snapping Toggle
+  if (isometricToggle && projectsCanvas) {
+    isometricToggle.addEventListener('click', () => {
+      const isCurrentlyIso = projectsCanvas.classList.contains('isometric-active');
+      if (isCurrentlyIso) {
+        projectsCanvas.classList.remove('isometric-active');
+        isometricToggle.classList.remove('active');
+        isometricToggle.setAttribute('aria-pressed', 'false');
+      } else {
+        projectsCanvas.classList.add('isometric-active');
+        isometricToggle.classList.add('active');
+        isometricToggle.setAttribute('aria-pressed', 'true');
+      }
+    });
+  }
+
+  // ==========================================================================
+  // 8. CONTACT FORM WITH SNAPPY VALIDATION FEEDBACK
+  // ==========================================================================
   const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const btn = this.querySelector('button[type="submit"]');
+      const originalHTML = btn.innerHTML;
 
-  contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const btn = this.querySelector('button[type="submit"]');
-    const originalHTML = btn.innerHTML;
-
-    btn.innerHTML = '<span>Sending...</span>';
-    btn.disabled = true;
-    btn.style.opacity = '0.7';
-
-    setTimeout(() => {
-      btn.innerHTML = '<span>Message Sent!</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>';
-      btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
-      btn.style.boxShadow = '0 0 25px rgba(16, 185, 129, 0.3)';
+      btn.disabled = true;
+      btn.innerHTML = '<span>Sending...</span>';
 
       setTimeout(() => {
-        btn.innerHTML = originalHTML;
-        btn.disabled = false;
-        btn.style.opacity = '';
-        btn.style.background = '';
-        btn.style.boxShadow = '';
-        contactForm.reset();
-      }, 3000);
-    }, 1500);
-  });
+        btn.innerHTML = '<span>Message Sent!</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>';
+        btn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+        btn.style.boxShadow = '0 12px 25px -4px rgba(16, 185, 129, 0.4)';
 
-  // === Grid Overlay Parallax on Hero ===
-  const heroGrid = document.querySelector('.hero-grid-overlay');
+        setTimeout(() => {
+          btn.innerHTML = originalHTML;
+          btn.disabled = false;
+          btn.style.background = '';
+          btn.style.boxShadow = '';
+          contactForm.reset();
+        }, 3200);
+      }, 1000);
+    });
+  }
 
-  window.addEventListener('scroll', () => {
-    if (heroGrid) {
-      const scrolled = window.scrollY;
-      heroGrid.style.transform = `translateY(${scrolled * 0.3}px)`;
-    }
-  });
-
-  // === Hero Content Parallax ===
-  const heroContent = document.querySelector('.hero-content');
-
-  window.addEventListener('scroll', () => {
-    if (heroContent) {
-      const scrolled = window.scrollY;
-      if (scrolled < window.innerHeight) {
-        heroContent.style.transform = `translateY(${scrolled * 0.15}px)`;
-        heroContent.style.opacity = 1 - (scrolled / window.innerHeight) * 0.8;
-      }
-    }
-  });
-
-  // === Language Switcher ===
+  // ==========================================================================
+  // 9. BILINGUAL INTERNATIONALIZATION (EN / AR) WITH PERSISTENCE
+  // ==========================================================================
   const languageToggle = document.getElementById('languageToggle');
   const translations = {
     en: {
-      pageTitle: 'CyberPortfolio | Developer', navHome: 'Home', navAbout: 'About', navProjects: 'Projects', navContact: 'Contact', languageButton: 'العربية', available: 'Available for opportunities', role: 'Computer Engineering Student', heroSubtitle: 'Computer Engineering student passionate about building innovative tech solutions and exploring the future of web development', viewProjects: 'View Projects', contactMe: 'Contact Me', projects: 'Projects', projectsHeading: 'My <span class="gradient-text">Projects</span>', yearsExp: 'Years Exp', courses: 'Courses', about: 'About', me: 'Me', aboutDesc: 'Get to know the developer behind the code', hello: "Hello, I'm Walaa aldine alsaleh", aboutText1: "A passionate Computer Engineering student with a deep interest in software development, embedded systems, and modern web technologies. I'm constantly learning and building projects that push my understanding of how hardware and software work together.", aboutText2: 'My journey in computer engineering has equipped me with a strong foundation in programming, algorithms, and system design. I enjoy working on projects that combine creativity with technical problem-solving, from web applications to embedded systems.', nameLabel: 'Name:', locationLabel: 'Location:', syria: 'Syria', experienceLabel: 'Experience:', studentExperience: 'Student / 0 Years', availabilityLabel: 'Availability:', freeOpportunities: 'Free for opportunities', downloadResume: 'Download Resume', projectsDesc: 'From raw ideas to polished digital experiences', bagcoTitle: 'Turn simple handbag photos into a feature ad with the magic of <span class="gradient-text">AI</span>', bagcoDesc: 'I transform ordinary product images into cinematic advertising concepts, shaping the visual story from the first frame through to the final video.', olkTitle: 'Give an everyday handbag a cinematic story with <span class="gradient-text">AI</span>', olkDesc: 'I turn Olk handbag photography into a polished product advertisement with a clear visual rhythm from storyboard to final cut.', wiwuTitle: 'Build a feature ad for a modern backpack with <span class="gradient-text">AI</span>', wiwuDesc: 'I shape WiWU backpack images into a focused product story, pairing a practical design with an energetic final video.', aiVideo: 'AI Video', creativeDirection: 'Creative Direction', productAds: 'Product Ads', featuredWork: 'Featured work', productImage: 'Product Image', storyboard: 'Storyboard', finalVideo: 'Final Video', getAiVideo: 'Get Your AI Video', getIn: 'Get In', touch: 'Touch', contactDesc: "Have a project in mind? Let's work together", email: 'Email', phone: 'Phone', telegram: 'Telegram', sendMessage: 'Send Message', yourName: 'Your Name', yourEmail: 'Your Email', subject: 'Subject', yourMessage: 'Your Message', footerIntro: 'Building the future of web, one pixel at a time.', quickLinks: 'Quick Links', resources: 'Resources', resume: 'Resume', blog: 'Blog', techStack: 'Tech Stack', openSource: 'Open Source', privacy: 'Privacy', terms: 'Terms', profileAlt: 'Walaa aldine alsaleh'
+      pageTitle: 'Walaa Aldine Alsaleh | Antigravity Portfolio',
+      navHome: 'Home',
+      navAbout: 'About',
+      navProjects: 'Projects',
+      navContact: 'Contact',
+      languageButton: 'العربية',
+      available: 'Available for opportunities',
+      role: 'Computer Engineering Student',
+      heroSubtitle: 'Computer Engineering student passionate about building innovative tech solutions and exploring the future of web development.',
+      viewProjects: 'View Projects',
+      contactMe: 'Contact Me',
+      projects: 'Projects',
+      featuredWorks: 'Featured',
+      yearsExp: 'Years Exp',
+      courses: 'Courses',
+      about: 'About',
+      me: 'Me',
+      aboutDesc: 'Get to know the developer behind the code',
+      hello: "Hello, I'm Walaa aldine alsaleh",
+      aboutText1: "A passionate Computer Engineering student with a deep interest in software development, embedded systems, and modern web technologies. I'm constantly learning and building projects that push my understanding of how hardware and software work together.",
+      aboutText2: 'My journey in computer engineering has equipped me with a strong foundation in programming, algorithms, and system design. I enjoy working on projects that combine creativity with technical problem-solving, from web applications to embedded systems.',
+      nameLabel: 'Name:',
+      locationLabel: 'Location:',
+      syria: 'Syria',
+      experienceLabel: 'Experience:',
+      studentExperience: 'Student / 0 Years',
+      availabilityLabel: 'Availability:',
+      freeOpportunities: 'Free for opportunities',
+      downloadResume: 'Download Resume',
+      projectsDesc: 'From raw ideas to polished digital experiences',
+      filterAll: 'All Projects',
+      filterAiVideo: 'AI Video & Direction',
+      filterSoftware: 'Software & Systems',
+      isometricMode: 'Isometric 3D',
+      bagcoTitle: 'Turn simple handbag photos into a feature ad with the magic of <span class="gradient-iridescent">AI</span>',
+      bagcoDesc: 'I transform ordinary product images into cinematic advertising concepts, shaping the visual story from the first frame through to the final video.',
+      olkTitle: 'Give an everyday handbag a cinematic story with <span class="gradient-iridescent">AI</span>',
+      olkDesc: 'I turn Olk handbag photography into a polished product advertisement with a clear visual rhythm from storyboard to final cut.',
+      wiwuTitle: 'Build a feature ad for a modern backpack with <span class="gradient-iridescent">AI</span>',
+      wiwuDesc: 'I shape WiWU backpack images into a focused product story, pairing a practical design with an energetic final video.',
+      aiVideo: 'AI Video',
+      creativeDirection: 'Creative Direction',
+      productAds: 'Product Ads',
+      featuredWork: 'Featured work',
+      productImage: 'Product Image',
+      storyboard: 'Storyboard',
+      finalVideo: 'Final Video',
+      getAiVideo: 'Get Your AI Video',
+      proj1Title: 'Personal Portfolio Website',
+      proj1Desc: 'Responsive spatial portfolio featuring futuristic glassmorphism, GSAP animations, and interactive 3D UI components.',
+      proj2Title: 'Student Management System',
+      proj2Desc: 'Console application built with robust OOP architecture, persistent file I/O, and efficient student record indexing.',
+      proj3Title: 'Data Analysis Tool',
+      proj3Desc: 'Statistical data processor and interactive charting engine that uncovers patterns and metrics across large datasets.',
+      proj4Title: 'Smart Home Monitoring',
+      proj4Desc: 'Hardware-software ecosystem tracking ambient telemetry (temperature, humidity, motion) with telemetry logging.',
+      proj5Title: 'Task Manager App',
+      proj5Desc: 'Full-stack collaborative task management dashboard with JWT authentication, status pipelines, and real-time state sync.',
+      proj6Title: 'Algorithm Visualizer',
+      proj6Desc: 'Interactive application visualizing sorting, graph traversal, and pathfinding algorithms with real-time complexity metrics.',
+      getIn: 'Get In',
+      touch: 'Touch',
+      contactDesc: "Have an ambitious project or opportunity in mind? Let's connect.",
+      email: 'Email',
+      phone: 'WhatsApp',
+      telegram: 'Telegram',
+      sendMessage: 'Send Message',
+      yourName: 'Your Name',
+      yourEmail: 'Your Email',
+      subject: 'Subject',
+      yourMessage: 'Your Message',
+      footerIntro: 'Engineering modern digital realities at the intersection of hardware, software, and creative motion.',
+      quickLinks: 'Quick Links',
+      resources: 'Resources',
+      resume: 'Resume PDF',
+      openSource: 'GitHub Source',
+      profileAlt: 'Walaa aldine alsaleh'
     },
     ar: {
-      pageTitle: 'محفظة سايبر | مطوّر', navHome: 'الرئيسية', navAbout: 'نبذة عني', navProjects: 'المشاريع', navContact: 'تواصل معي', languageButton: 'English', available: 'متاح للفرص', role: 'طالب هندسة حاسوب', heroSubtitle: 'طالب هندسة حاسوب شغوف ببناء حلول تقنية مبتكرة واستكشاف مستقبل تطوير الويب', viewProjects: 'استعرض المشاريع', contactMe: 'تواصل معي', projects: 'المشاريع', projectsHeading: 'مشاريعي', yearsExp: 'سنوات الخبرة', courses: 'الدورات', about: 'نبذة', me: 'عني', aboutDesc: 'تعرّف على المطوّر خلف الشيفرة', hello: 'مرحباً، أنا ولاء الدين الصالح', aboutText1: 'طالب هندسة حاسوب شغوف بتطوير البرمجيات والأنظمة المضمنة وتقنيات الويب الحديثة. أواصل التعلم وبناء المشاريع التي توسّع فهمي لكيفية عمل العتاد والبرمجيات معاً.', aboutText2: 'منحتني رحلتي في هندسة الحاسوب أساساً قوياً في البرمجة والخوارزميات وتصميم الأنظمة. أستمتع بالمشاريع التي تجمع الإبداع مع حل المشكلات التقنية، من تطبيقات الويب إلى الأنظمة المضمنة.', nameLabel: 'الاسم:', locationLabel: 'الموقع:', syria: 'سوريا', experienceLabel: 'الخبرة:', studentExperience: 'طالب / 0 سنوات', availabilityLabel: 'التفرغ:', freeOpportunities: 'متاح للفرص', downloadResume: 'تحميل السيرة الذاتية', projectsDesc: 'من الأفكار الأولية إلى التجارب الرقمية المتقنة', bagcoTitle: 'تحويل صور حقيبة بسيطة إلى إعلان مميز بسحر <span class="gradient-text">الذكاء الاصطناعي</span>', bagcoDesc: 'أحوّل صور المنتجات العادية إلى أفكار إعلانية سينمائية، وأبني القصة البصرية من اللقطة الأولى حتى الفيديو النهائي.', olkTitle: 'منح حقيبة يومية قصة سينمائية باستخدام <span class="gradient-text">الذكاء الاصطناعي</span>', olkDesc: 'أحوّل صور حقائب Olk إلى إعلان منتج متكامل بإيقاع بصري واضح، من لوحة القصة إلى المونتاج النهائي.', wiwuTitle: 'بناء إعلان مميز لحقيبة ظهر عصرية باستخدام <span class="gradient-text">الذكاء الاصطناعي</span>', wiwuDesc: 'أصوغ صور حقائب WiWU في قصة منتج مركزة تجمع التصميم العملي بفيديو نهائي حيوي.', aiVideo: 'فيديو بالذكاء الاصطناعي', creativeDirection: 'إخراج إبداعي', productAds: 'إعلانات منتجات', featuredWork: 'عمل مميز', productImage: 'صورة المنتج', storyboard: 'لوحة القصة', finalVideo: 'الفيديو النهائي', getAiVideo: 'احصل على فيديو بالذكاء الاصطناعي', getIn: 'تواصل', touch: 'معي', contactDesc: 'لديك مشروع في ذهنك؟ لنعمل معاً', email: 'البريد الإلكتروني', phone: 'الهاتف', telegram: 'تلغرام', sendMessage: 'إرسال رسالة', yourName: 'اسمك', yourEmail: 'بريدك الإلكتروني', subject: 'الموضوع', yourMessage: 'رسالتك', footerIntro: 'نبني مستقبل الويب، بكسل واحد في كل مرة.', quickLinks: 'روابط سريعة', resources: 'المصادر', resume: 'السيرة الذاتية', blog: 'المدونة', techStack: 'التقنيات', openSource: 'المصادر المفتوحة', privacy: 'الخصوصية', terms: 'الشروط', profileAlt: 'ولاء الدين الصالح'
+      pageTitle: 'ولاء الدين الصالح | معرض الأعمال الرقمي',
+      navHome: 'الرئيسية',
+      navAbout: 'نبذة عني',
+      navProjects: 'المشاريع',
+      navContact: 'تواصل معي',
+      languageButton: 'English',
+      available: 'متاح للفرص والمشاريع',
+      role: 'طالب هندسة حاسوب',
+      heroSubtitle: 'طالب هندسة حاسوب شغوف بابتكار الحلول التقنية المتقدمة واستكشاف مستقبل تطوير الويب والواجهات الفضائية.',
+      viewProjects: 'استعراض المشاريع',
+      contactMe: 'تواصل معي',
+      projects: 'المشاريع',
+      featuredWorks: 'أبرز',
+      yearsExp: 'سنوات الخبرة',
+      courses: 'الدورات التدريبية',
+      about: 'نبذة',
+      me: 'عني',
+      aboutDesc: 'تعرّف على المهندس والمطور خلف الشيفرة',
+      hello: 'مرحباً، أنا ولاء الدين الصالح',
+      aboutText1: 'طالب هندسة حاسوب شغوف بتطوير البرمجيات، الأنظمة المضمنة، وأحدث تقنيات الويب التفاعلية. أواصل التعلّم وتطوير مشاريع عملية تعمّق فهمي لتقاطع العتاد مع البرمجيات.',
+      aboutText2: 'أكسبتني مسيرتي في هندسة الحاسوب أساساً متيناً في هندسة الأنظمة والخوارزميات والبرمجة كائنية التوجه. أجمع بين الرؤية الإبداعية وحل المشكلات الهندسية المعقدة.',
+      nameLabel: 'الاسم:',
+      locationLabel: 'الموقع:',
+      syria: 'سوريا',
+      experienceLabel: 'المستوى:',
+      studentExperience: 'طالب / 0 سنوات',
+      availabilityLabel: 'الحالة:',
+      freeOpportunities: 'جاهز للفرص الجديدة',
+      downloadResume: 'تحميل السيرة الذاتية',
+      projectsDesc: 'من المفاهيم الأولية إلى تجارب رقمية ثلاثية الأبعاد متقنة',
+      filterAll: 'كافة المشاريع',
+      filterAiVideo: 'فيديو وإخراج الذكاء الاصطناعي',
+      filterSoftware: 'البرمجيات والأنظمة',
+      isometricMode: 'العرض الأيزومتري',
+      bagcoTitle: 'تحويل صور حقائب بسيطة إلى إعلان سنمائي مميز بسحر <span class="gradient-iridescent">الذكاء الاصطناعي</span>',
+      bagcoDesc: 'أحوّل صور المنتجات الفوتوغرافية إلى مفاهيم إعلانية سينمائية مبهرة، مع صياغة القصة البصرية من اللقطة الأولى وحتى المونتاج النهائي.',
+      olkTitle: 'منح حقيبة يومية قصة إعلانية سينمائية متكاملة بالذكاء الاصطناعي',
+      olkDesc: 'صياغة صور منتجات Olk في إعلان متقن يحمل إيقاعاً بصرياً انسيابياً من لوحة القصة إلى الفيديو النهائي.',
+      wiwuTitle: 'إنتاج إعلان مميز لحقيبة ظهر عصرية بأحدث تقنيات الذكاء الاصطناعي',
+      wiwuDesc: 'تحويل صور حقائب WiWU إلى قصة إعلانية تفاعلية تجمع بين التصميم المبتكر والإيقاع الحيوي.',
+      aiVideo: 'فيديو بالذكاء الاصطناعي',
+      creativeDirection: 'إخراج إبداعي',
+      productAds: 'إعلانات تجارية',
+      featuredWork: 'مشروع مميز',
+      productImage: 'صور المنتج',
+      storyboard: 'لوحة القصة',
+      finalVideo: 'الفيديو النهائي',
+      getAiVideo: 'اطلب الفيديو الآن',
+      proj1Title: 'موقع المعرض الشخصي',
+      proj1Desc: 'معرض أعمال تفاعلي ثلاثي الأبعاد بتصميم زجاجي وحركات انسيابية بتقنية GSAP ومؤثرات أيزومترية.',
+      proj2Title: 'نظام إدارة شؤون الطلاب',
+      proj2Desc: 'تطبيق متقدم مكتوب بلغة C++ يعتمد على مبادئ البرمجة كائنية التوجه وهياكل البيانات وتنظيم الملفات.',
+      proj3Title: 'أداة تحليل ومعالجة البيانات',
+      proj3Desc: 'منظومة بايثون لتحليل البيانات الضخمة وتمثيل المؤشرات الإحصائية باستخدام مكتبات Pandas وMatplotlib.',
+      proj4Title: 'منظومة مراقبة المنزل الذكي',
+      proj4Desc: 'مشروع إنترنت أشياء متكامل يجمع حساسات المعالجة والمتحكمات البرمجية لتتبع درجات الحرارة والرطوبة والحركة.',
+      proj5Title: 'تطبيق إدارة المهام المتكامل',
+      proj5Desc: 'تطبيق ويب عالي الأداء مع نظام توثيق أمني ومزامنة فورية للبيانات وتتبع مراحل الإنجاز.',
+      proj6Title: 'محاكي الخوارزميات التفاعلي',
+      proj6Desc: 'تطبيق تفاعلي بلغة Java لمحاكاة خوارزميات الترتيب والبحث والرسم البياني مع مؤشرات الكفاءة اللحظية.',
+      getIn: 'تواصل',
+      touch: 'معي',
+      contactDesc: 'هل لديك مشروع طموح أو فرصة مهنية ترغب في مناقشتها؟ يسعدني التواصل معك.',
+      email: 'البريد الإلكتروني',
+      phone: 'واتساب',
+      telegram: 'تلغرام',
+      sendMessage: 'إرسال الرسالة',
+      yourName: 'الاسم الكامل',
+      yourEmail: 'البريد الإلكتروني',
+      subject: 'موضوع الرسالة',
+      yourMessage: 'نص الرسالة',
+      footerIntro: 'هندسة تجارب رقمية عصرية عند نقطة التقاء العتاد والبرمجيات والمؤثرات البصرية.',
+      quickLinks: 'روابط سريعة',
+      resources: 'المصادر',
+      resume: 'ملف السيرة الذاتية',
+      openSource: 'المصدر المفتوح',
+      profileAlt: 'ولاء الدين الصالح'
     }
   };
 
-  function setLanguage(language) {
-    const dictionary = translations[language];
-    document.documentElement.lang = language;
-    document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
-    document.title = dictionary.pageTitle;
-    document.querySelectorAll('[data-i18n]').forEach(element => {
-      element.innerHTML = dictionary[element.dataset.i18n];
+  function setLanguage(lang) {
+    const dict = translations[lang] || translations.en;
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.title = dict.pageTitle;
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[key]) el.innerHTML = dict[key];
     });
-    document.querySelectorAll('[data-i18n-alt]').forEach(element => {
-      element.alt = dictionary[element.dataset.i18nAlt];
+
+    document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+      const key = el.getAttribute('data-i18n-alt');
+      if (dict[key]) el.alt = dict[key];
     });
-    document.querySelectorAll('.workflow-stage-heading span:last-child').forEach(element => {
-      const key = element.textContent.trim() === 'Product Image' || element.textContent.trim() === 'صورة المنتج' ? 'productImage' : element.textContent.trim() === 'Storyboard' || element.textContent.trim() === 'لوحة القصة' ? 'storyboard' : 'finalVideo';
-      element.textContent = dictionary[key];
-    });
-    document.querySelectorAll('.workflow-cta span').forEach(element => {
-      element.textContent = dictionary.getAiVideo;
-    });
-    document.querySelector('.language-code').textContent = language === 'en' ? 'ع' : 'E';
-    languageToggle.setAttribute('aria-label', language === 'ar' ? 'Switch to English' : 'Switch to Arabic');
-    localStorage.setItem('portfolio-language', language);
+
+    const langCodeEl = document.querySelector('.language-code');
+    if (langCodeEl) langCodeEl.textContent = lang === 'en' ? 'ع' : 'E';
+
+    if (languageToggle) {
+      languageToggle.setAttribute('aria-label', lang === 'ar' ? 'Switch to English' : 'Switch to Arabic');
+    }
+
+    localStorage.setItem('antigravity-lang', lang);
   }
 
-  const savedLanguage = localStorage.getItem('portfolio-language') || 'en';
+  const savedLanguage = localStorage.getItem('antigravity-lang') || 'en';
   setLanguage(savedLanguage);
-  languageToggle.addEventListener('click', () => setLanguage(document.documentElement.lang === 'en' ? 'ar' : 'en'));
 
-  // === Initialize ===
-  handleScroll();
-  highlightNavLink();
-
+  if (languageToggle) {
+    languageToggle.addEventListener('click', () => {
+      const current = document.documentElement.lang;
+      setLanguage(current === 'en' ? 'ar' : 'en');
+    });
+  }
 });
