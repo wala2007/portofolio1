@@ -272,24 +272,6 @@ document.addEventListener('DOMContentLoaded', () => {
       once: true
     });
 
-    // Software Cards Grid Stagger
-    ScrollTrigger.batch('.software-card', {
-      start: 'top 88%',
-      onEnter: (batch) => {
-        gsap.set(batch, { willChange: 'transform, opacity' });
-        gsap.from(batch, {
-          y: 45,
-          opacity: 0,
-          scale: 0.96,
-          duration: 0.75,
-          stagger: 0.1, // Stagger entrance animations by 0.1s
-          ease: 'power3.out',
-          onComplete: () => gsap.set(batch, { willChange: 'auto' })
-        });
-      },
-      once: true
-    });
-
     // Contact Section Stagger
     ScrollTrigger.batch('.contact-channel-card, .contact-socials-row, .contact-form', {
       start: 'top 85%',
@@ -399,39 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
-  // 7. PROJECT FILTERING
-  // ==========================================================================
-  const filterTabs = document.querySelectorAll('.filter-tab');
-  const projectGroups = document.querySelectorAll('.project-group');
-
-  // Filter Tabs
-  filterTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      filterTabs.forEach(t => {
-        t.classList.remove('active');
-        t.setAttribute('aria-selected', 'false');
-      });
-      tab.classList.add('active');
-      tab.setAttribute('aria-selected', 'true');
-
-      const filter = tab.getAttribute('data-filter');
-
-      projectGroups.forEach(group => {
-        const cat = group.getAttribute('data-category');
-        if (filter === 'all' || filter === cat) {
-          group.classList.add('active-group');
-          if (window.gsap && !prefersReducedMotion) {
-            gsap.fromTo(group, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' });
-          }
-        } else {
-          group.classList.remove('active-group');
-        }
-      });
-    });
-  });
-
-  // ==========================================================================
-  // 8. CONTACT FORM WITH SNAPPY VALIDATION FEEDBACK
+  // 7. CONTACT FORM WITH SNAPPY VALIDATION FEEDBACK
   // ==========================================================================
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
@@ -495,10 +445,6 @@ document.addEventListener('DOMContentLoaded', () => {
       freeOpportunities: 'Free for opportunities',
       downloadResume: 'Download Resume',
       projectsDesc: 'From raw ideas to polished digital experiences',
-      filterAll: 'All Projects',
-      filterAiVideo: 'AI Video & Direction',
-      filterSoftware: 'Software & Systems',
-      isometricMode: 'Isometric 3D',
       bagcoTitle: 'Turn simple handbag photos into a feature ad with the magic of <span class="gradient-iridescent">AI</span>',
       bagcoDesc: 'I transform ordinary product images into cinematic advertising concepts, shaping the visual story from the first frame through to the final video.',
       olkTitle: 'Give an everyday handbag a cinematic story with <span class="gradient-iridescent">AI</span>',
@@ -513,18 +459,6 @@ document.addEventListener('DOMContentLoaded', () => {
       storyboard: 'Storyboard',
       finalVideo: 'Final Video',
       getAiVideo: 'Get Your AI Video',
-      proj1Title: 'Personal Portfolio Website',
-      proj1Desc: 'Responsive spatial portfolio featuring futuristic glassmorphism, GSAP animations, and interactive 3D UI components.',
-      proj2Title: 'Student Management System',
-      proj2Desc: 'Console application built with robust OOP architecture, persistent file I/O, and efficient student record indexing.',
-      proj3Title: 'Data Analysis Tool',
-      proj3Desc: 'Statistical data processor and interactive charting engine that uncovers patterns and metrics across large datasets.',
-      proj4Title: 'Smart Home Monitoring',
-      proj4Desc: 'Hardware-software ecosystem tracking ambient telemetry (temperature, humidity, motion) with telemetry logging.',
-      proj5Title: 'Task Manager App',
-      proj5Desc: 'Full-stack collaborative task management dashboard with JWT authentication, status pipelines, and real-time state sync.',
-      proj6Title: 'Algorithm Visualizer',
-      proj6Desc: 'Interactive application visualizing sorting, graph traversal, and pathfinding algorithms with real-time complexity metrics.',
       getIn: 'Get In',
       touch: 'Touch',
       contactDesc: "Have an ambitious project or opportunity in mind? Let's connect.",
@@ -574,10 +508,6 @@ document.addEventListener('DOMContentLoaded', () => {
       freeOpportunities: 'جاهز للفرص الجديدة',
       downloadResume: 'تحميل السيرة الذاتية',
       projectsDesc: 'من المفاهيم الأولية إلى تجارب رقمية ثلاثية الأبعاد متقنة',
-      filterAll: 'كافة المشاريع',
-      filterAiVideo: 'فيديو وإخراج الذكاء الاصطناعي',
-      filterSoftware: 'البرمجيات والأنظمة',
-      isometricMode: 'العرض الأيزومتري',
       bagcoTitle: 'تحويل صور حقائب بسيطة إلى إعلان سنمائي مميز بسحر <span class="gradient-iridescent">الذكاء الاصطناعي</span>',
       bagcoDesc: 'أحوّل صور المنتجات الفوتوغرافية إلى مفاهيم إعلانية سينمائية مبهرة، مع صياغة القصة البصرية من اللقطة الأولى وحتى المونتاج النهائي.',
       olkTitle: 'منح حقيبة يومية قصة إعلانية سينمائية متكاملة بالذكاء الاصطناعي',
@@ -592,18 +522,6 @@ document.addEventListener('DOMContentLoaded', () => {
       storyboard: 'لوحة القصة',
       finalVideo: 'الفيديو النهائي',
       getAiVideo: 'اطلب الفيديو الآن',
-      proj1Title: 'موقع المعرض الشخصي',
-      proj1Desc: 'معرض أعمال تفاعلي ثلاثي الأبعاد بتصميم زجاجي وحركات انسيابية بتقنية GSAP ومؤثرات أيزومترية.',
-      proj2Title: 'نظام إدارة شؤون الطلاب',
-      proj2Desc: 'تطبيق متقدم مكتوب بلغة C++ يعتمد على مبادئ البرمجة كائنية التوجه وهياكل البيانات وتنظيم الملفات.',
-      proj3Title: 'أداة تحليل ومعالجة البيانات',
-      proj3Desc: 'منظومة بايثون لتحليل البيانات الضخمة وتمثيل المؤشرات الإحصائية باستخدام مكتبات Pandas وMatplotlib.',
-      proj4Title: 'منظومة مراقبة المنزل الذكي',
-      proj4Desc: 'مشروع إنترنت أشياء متكامل يجمع حساسات المعالجة والمتحكمات البرمجية لتتبع درجات الحرارة والرطوبة والحركة.',
-      proj5Title: 'تطبيق إدارة المهام المتكامل',
-      proj5Desc: 'تطبيق ويب عالي الأداء مع نظام توثيق أمني ومزامنة فورية للبيانات وتتبع مراحل الإنجاز.',
-      proj6Title: 'محاكي الخوارزميات التفاعلي',
-      proj6Desc: 'تطبيق تفاعلي بلغة Java لمحاكاة خوارزميات الترتيب والبحث والرسم البياني مع مؤشرات الكفاءة اللحظية.',
       getIn: 'تواصل',
       touch: 'معي',
       contactDesc: 'هل لديك مشروع طموح أو فرصة مهنية ترغب في مناقشتها؟ يسعدني التواصل معك.',
