@@ -1106,7 +1106,7 @@ body:hover .cursor-glow {
 .workflow-stage.workflow-output {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .workflow-media.workflow-video {
